@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saefyu - Secret</title>
+    <title>Saefyu - Donation</title>
     <style>
         body, html {
             margin: 0;
@@ -13,72 +13,84 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Nền đen kim loại xước nhẹ */
             background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
             font-family: 'Consolas', monospace;
             overflow: hidden;
+            color: white;
         }
 
         .container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
             align-items: center;
         }
 
+        /* Title Donation phong cách Minimalist Metal */
+        .title {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            color: #444; /* Màu xám tối */
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.05);
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
         .secret-btn {
-            padding: 15px 30px;
-            font-size: 14px;
+            padding: 15px 35px;
+            font-size: 13px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: linear-gradient(145deg, #1e1e1e, #111111);
-            color: #555;
-            border-radius: 5px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
-            min-width: 200px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: linear-gradient(145deg, #181818, #0a0a0a);
+            color: #444;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.8);
+            min-width: 220px;
             text-align: center;
         }
 
-        /* Hiệu ứng khi di chuột qua nút */
         .secret-btn:hover {
-            color: #fff;
-            transform: translateY(-3px);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+            color: #aaa;
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02);
         }
 
-        /* CSS cho các nội dung hiện ra */
         .content {
             display: none;
-            margin-top: 10px;
-            font-size: 0.85rem;
+            margin-top: 15px;
+            font-size: 0.8rem;
             word-break: break-all;
-            padding: 10px;
-            border-radius: 4px;
-            background: rgba(0,0,0,0.3);
-            border-left: 3px solid;
-            animation: fadeIn 0.5s ease;
+            padding: 12px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.02);
+            border-left: 2px solid;
+            animation: slideDown 0.4s ease-out;
+            max-width: 300px;
+            text-align: center;
         }
 
-        @keyframes fadeIn {
+        @keyframes slideDown {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Màu riêng cho từng nút khi được kích hoạt */
-        .active-1 { color: #f2a900 !important; border-color: #f2a900 !important; } /* Bitcoin Gold */
-        .active-2 { color: #627eea !important; border-color: #627eea !important; } /* Ethereum Blue */
-        .active-3 { color: #345d9d !important; border-color: #345d9d !important; } /* Litecoin Silver-Blue */
+        /* Màu khi kích hoạt */
+        .active-1 { color: #f2a900 !important; border-color: #f2a900 !important; box-shadow: 0 0 15px rgba(242, 169, 0, 0.2) !important; }
+        .active-2 { color: #627eea !important; border-color: #627eea !important; box-shadow: 0 0 15px rgba(98, 126, 234, 0.2) !important; }
+        .active-3 { color: #50af95 !important; border-color: #50af95 !important; box-shadow: 0 0 15px rgba(80, 175, 149, 0.2) !important; }
 
     </style>
 </head>
 <body>
 
     <div class="container">
+        <div class="title">Donation</div>
+
         <div class="item">
             <div class="secret-btn" onclick="toggleSecret(1, this)">Secret I</div>
             <div id="secret-1" class="content" style="border-color: #f2a900; color: #f2a900;">bc1qkx2kghxz8rg32ewu5gu69xnyfxulp6mpuwffg2</div>
@@ -91,7 +103,7 @@
 
         <div class="item">
             <div class="secret-btn" onclick="toggleSecret(3, this)">Secret III</div>
-            <div id="secret-3" class="content" style="border-color: #345d9d; color: #345d9d;">ltc1qs7p34zpuucnyanxpf59evugn5t5utnhpey9qp5</div>
+            <div id="secret-3" class="content" style="border-color: #50af95; color: #50af95;">ltc1qs7p34zpuucnyanxpf59evugn5t5utnhpey9qp5</div>
         </div>
     </div>
 
@@ -99,10 +111,6 @@
         function toggleSecret(id, btn) {
             const content = document.getElementById('secret-' + id);
             const isVisible = content.style.display === 'block';
-            
-            // Ẩn tất cả trước khi hiện cái mới (tùy chọn)
-            // document.querySelectorAll('.content').forEach(el => el.style.display = 'none');
-            // document.querySelectorAll('.secret-btn').forEach(el => el.classList.remove('active-1', 'active-2', 'active-3'));
 
             if (!isVisible) {
                 content.style.display = 'block';
