@@ -13,11 +13,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
             font-family: 'Consolas', monospace;
             overflow: hidden;
             color: white;
-            cursor: default; /* Giữ chuột mặc định */
+            cursor: default;
         }
 
         .container {
@@ -25,134 +25,161 @@
             flex-direction: column;
             gap: 20px;
             align-items: center;
-            z-index: 10; /* Để nổi lên trên hiệu ứng trail */
+            z-index: 10;
+            padding-bottom: 50px; /* Tạo khoảng trống ở dưới */
         }
 
-        /* --- TOGGLE BUTTON GÓC PHẢI --- */
+        /* --- BUTTON TOGGLE MOTION --- */
         .motion-toggle {
             position: absolute;
             top: 20px;
             right: 20px;
-            font-size: 12px;
-            color: #444;
-            border: 1px solid #333;
-            padding: 8px 15px;
+            font-size: 11px;
+            color: #333;
+            border: 1px solid #222;
+            padding: 8px 12px;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s;
             z-index: 100;
             user-select: none;
+            border-radius: 4px;
         }
         .motion-toggle:hover {
-            border-color: #666;
-            color: #888;
+            border-color: #555;
+            color: #777;
         }
         .motion-active {
-            color: #0f0 !important; /* Xanh lá khi bật */
+            color: #0f0 !important;
             border-color: #0f0 !important;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.1);
+            text-shadow: 0 0 5px #0f0;
         }
 
-        /* --- TEXT STYLES & RED SWIPE EFFECT --- */
-        .text-header {
+        /* --- TITLE --- */
+        .title-donation {
+            font-size: 3rem;
             text-transform: uppercase;
-            letter-spacing: 6px;
-            color: #444; 
+            letter-spacing: 10px;
             font-weight: 900;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            display: inline-block;
-            
-            /* Hiệu ứng gradient swipe */
+            margin-bottom: 10px;
+            color: #444;
+            text-shadow: 0 0 10px rgba(255,255,255,0.05);
+            /* Hiệu ứng swipe đỏ */
             background: linear-gradient(to right, #444 50%, #ff0000 50%);
             background-size: 200% 100%;
-            background-position: 0% 100%; /* Vị trí ban đầu */
+            background-position: 0% 100%;
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; 
+            -webkit-text-fill-color: transparent;
+            transition: background-position 0.5s ease;
+        }
+        .title-donation:hover {
+            background-position: 100% 100%;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
         }
 
-        .text-header:hover {
-            background-position: 100% 100%; /* Swipe sang đỏ khi hover */
-            text-shadow: 0 0 15px rgba(255, 0, 0, 0.6); /* Glow đỏ */
-        }
-
-        .social-row {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 10px;
-        }
-        
-        .social-item {
-            font-size: 1.2rem;
-            text-decoration: none; /* Bỏ gạch chân link */
-        }
-
-        .title-donation {
-            font-size: 2.5rem;
-            letter-spacing: 8px;
-            margin-bottom: 10px;
-        }
-
-        /* --- BUTTONS --- */
+        /* --- SECRET BUTTONS --- */
         .secret-btn {
-            padding: 15px 35px;
-            font-size: 13px;
+            padding: 15px 40px;
+            font-size: 14px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            background: linear-gradient(145deg, #181818, #0a0a0a);
-            color: #444;
-            border-radius: 4px;
+            background: linear-gradient(145deg, #161616, #080808);
+            color: #555;
+            border-radius: 6px;
             transition: all 0.3s ease;
-            box-shadow: 10px 10px 20px rgba(0,0,0,0.8);
-            min-width: 220px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            min-width: 250px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .secret-btn:hover {
-            color: #aaa;
-            border-color: rgba(255, 255, 255, 0.1);
-            transform: scale(1.02);
+            color: #ddd;
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.7);
         }
 
         .content {
             display: none;
-            margin-top: 15px;
-            font-size: 0.8rem;
-            word-break: break-all;
-            padding: 12px;
-            border-radius: 2px;
-            background: rgba(255,255,255,0.02);
-            border-left: 2px solid;
-            animation: slideDown 0.4s ease-out;
-            max-width: 300px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            padding: 10px;
+            background: rgba(255,255,255,0.03);
+            border-left: 3px solid;
+            animation: fadeIn 0.5s ease;
             text-align: center;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .active-1 { color: #f2a900 !important; border-color: #f2a900 !important; box-shadow: 0 0 15px rgba(242, 169, 0, 0.2) !important; }
-        .active-2 { color: #627eea !important; border-color: #627eea !important; box-shadow: 0 0 15px rgba(98, 126, 234, 0.2) !important; }
-        .active-3 { color: #50af95 !important; border-color: #50af95 !important; box-shadow: 0 0 15px rgba(80, 175, 149, 0.2) !important; }
+        /* --- SOCIAL SECTION (New) --- */
+        .social-column {
+            display: flex;
+            flex-direction: column; /* Xếp dọc */
+            gap: 15px;
+            margin-top: 30px; /* Cách xa phần nút một chút */
+            align-items: center;
+            width: 100%;
+        }
 
-        /* --- TRAIL EFFECT PARTICLES --- */
+        .social-item {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            cursor: pointer;
+            padding: 5px 10px;
+            position: relative;
+        }
+
+        /* Hiệu ứng hover cho social */
+        .social-item:hover {
+            color: #fff;
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff; /* Glow trắng sáng */
+            letter-spacing: 6px; /* Giãn chữ ra khi hover */
+        }
+
+        /* Màu riêng cho Discord reveal */
+        .discord-reveal {
+            color: #ff3333 !important;
+            text-shadow: 0 0 15px #ff3333 !important;
+        }
+
+        /* Active Colors */
+        .active-1 { color: #f2a900 !important; border-color: #f2a900 !important; box-shadow: 0 0 20px rgba(242, 169, 0, 0.15) !important; }
+        .active-2 { color: #627eea !important; border-color: #627eea !important; box-shadow: 0 0 20px rgba(98, 126, 234, 0.15) !important; }
+        .active-3 { color: #50af95 !important; border-color: #50af95 !important; box-shadow: 0 0 20px rgba(80, 175, 149, 0.15) !important; }
+
+        /* --- TRAIL EFFECT (Updated) --- */
         .trail-particle {
             position: absolute;
-            width: 8px;
-            height: 8px;
+            width: 14px; /* Lớn hơn */
+            height: 14px;
             border-radius: 50%;
             pointer-events: none;
-            animation: fadeOut 1s forwards;
+            mix-blend-mode: screen; /* Giúp màu rực hơn khi chồng lên nhau */
+            animation: particleAnim 1.2s forwards;
             z-index: 1;
+            /* Tạo độ mờ tỏa ra xung quanh */
+            filter: blur(2px); 
         }
-        @keyframes fadeOut {
+
+        @keyframes particleAnim {
             0% { transform: scale(1); opacity: 0.8; }
             100% { transform: scale(0); opacity: 0; }
         }
@@ -165,91 +192,6 @@
 
     <div class="container">
         
-        <div class="social-row">
-            <a href="https://github.com/Phat29072011" class="text-header social-item">GITHUB</a>
-            <div class="text-header social-item" onclick="revealDiscord(this)">DISCORD</div>
-        </div>
-
-        <div class="title-donation text-header">Donation</div>
+        <div class="title-donation">Donation</div>
 
         <div class="item">
-            <div class="secret-btn" onclick="toggleSecret(1, this)">Secret I</div>
-            <div id="secret-1" class="content" style="border-color: #f2a900; color: #f2a900;">bc1qkx2kghxz8rg32ewu5gu69xnyfxulp6mpuwffg2</div>
-        </div>
-
-        <div class="item">
-            <div class="secret-btn" onclick="toggleSecret(2, this)">Secret II</div>
-            <div id="secret-2" class="content" style="border-color: #627eea; color: #627eea;">0x8E049024e334A8e99087bcB0221A9158FfddB87c</div>
-        </div>
-
-        <div class="item">
-            <div class="secret-btn" onclick="toggleSecret(3, this)">Secret III</div>
-            <div id="secret-3" class="content" style="border-color: #50af95; color: #50af95;">ltc1qs7p34zpuucnyanxpf59evugn5t5utnhpey9qp5</div>
-        </div>
-    </div>
-
-    <script>
-        // --- LOGIC CHO BUTTONS SECRET ---
-        function toggleSecret(id, btn) {
-            const content = document.getElementById('secret-' + id);
-            const isVisible = content.style.display === 'block';
-
-            if (!isVisible) {
-                content.style.display = 'block';
-                btn.classList.add('active-' + id);
-            } else {
-                content.style.display = 'none';
-                btn.classList.remove('active-' + id);
-            }
-        }
-
-        // --- LOGIC CHO DISCORD REVEAL ---
-        function revealDiscord(element) {
-            element.innerText = "SAEFYU";
-            // Thêm chút hiệu ứng giật nhẹ cho ngầu
-            element.style.color = "#ff3333";
-        }
-
-        // --- LOGIC MOTION TRAIL ---
-        let motionEnabled = false;
-        let hue = 0;
-
-        function toggleMotion() {
-            motionEnabled = !motionEnabled;
-            const btn = document.getElementById('motionBtn');
-            if (motionEnabled) {
-                btn.innerText = "Motion: ON";
-                btn.classList.add('motion-active');
-            } else {
-                btn.innerText = "Motion: OFF";
-                btn.classList.remove('motion-active');
-            }
-        }
-
-        document.addEventListener('mousemove', function(e) {
-            if (!motionEnabled) return;
-
-            // Tạo hạt màu
-            const particle = document.createElement('div');
-            particle.classList.add('trail-particle');
-            
-            // Vị trí chuột
-            particle.style.left = e.pageX + 'px';
-            particle.style.top = e.pageY + 'px';
-            
-            // Màu sắc thay đổi liên tục (Rainbow)
-            particle.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
-            particle.style.boxShadow = `0 0 10px hsl(${hue}, 100%, 50%)`;
-            
-            document.body.appendChild(particle);
-            
-            hue += 5; // Thay đổi màu cho hạt tiếp theo
-
-            // Xóa hạt sau khi animation xong (1s)
-            setTimeout(() => {
-                particle.remove();
-            }, 1000);
-        });
-    </script>
-</body>
-</html>
