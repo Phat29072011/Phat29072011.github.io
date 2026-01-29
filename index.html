@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C++ & Python Enthusiast</title>
+    <title>Saefyu - Secret</title>
     <style>
         body, html {
             margin: 0;
@@ -13,71 +13,105 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Hiệu ứng Metallic Mix: Tổng hợp các màu bạc, vàng đồng, xanh thép và tím chrome */
-            background: linear-gradient(135deg, 
-                #757f9a, #d7dde8, #434343, #000000, 
-                #b8c6db, #f5f7fa, #8e9eab, #eef2f3,
-                #c0c0c0, #ffd700, #4b6cb7, #182848);
-            background-size: 400% 400%;
-            animation: metallicGradient 8s ease infinite;
+            /* Nền đen kim loại xước nhẹ */
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            font-family: 'Consolas', monospace;
             overflow: hidden;
-            color: white;
-        }
-
-        /* Animation làm cho màu nền di chuyển liên tục */
-        @keyframes metallicGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         .container {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.2); /* Làm mờ nền phía sau chữ để dễ đọc hơn */
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px); /* Hiệu ứng kính mờ hiện đại */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
         }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
+        .secret-btn {
+            padding: 15px 30px;
+            font-size: 14px;
+            font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .discord {
-            font-size: 1.5rem;
-            opacity: 0.9;
-            font-weight: 300;
             letter-spacing: 2px;
-            color: #e0e0e0;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(145deg, #1e1e1e, #111111);
+            color: #555;
+            border-radius: 5px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            min-width: 200px;
+            text-align: center;
         }
 
-        /* Hiệu ứng bóng bẩy cho chữ */
-        .highlight {
-            background: linear-gradient(to right, #fff 20%, #888 50%, #fff 80%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
+        /* Hiệu ứng khi di chuột qua nút */
+        .secret-btn:hover {
+            color: #fff;
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
-        @keyframes shine {
-            to { background-position: 200% center; }
+        /* CSS cho các nội dung hiện ra */
+        .content {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            word-break: break-all;
+            padding: 10px;
+            border-radius: 4px;
+            background: rgba(0,0,0,0.3);
+            border-left: 3px solid;
+            animation: fadeIn 0.5s ease;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Màu riêng cho từng nút khi được kích hoạt */
+        .active-1 { color: #f2a900 !important; border-color: #f2a900 !important; } /* Bitcoin Gold */
+        .active-2 { color: #627eea !important; border-color: #627eea !important; } /* Ethereum Blue */
+        .active-3 { color: #345d9d !important; border-color: #345d9d !important; } /* Litecoin Silver-Blue */
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1 class="highlight">Nigga really visit my website</h1>
-        <div class="discord">translation:thg da đen này thật sự vô trang web của tao</div>
+        <div class="item">
+            <div class="secret-btn" onclick="toggleSecret(1, this)">Secret I</div>
+            <div id="secret-1" class="content" style="border-color: #f2a900; color: #f2a900;">bc1qkx2kghxz8rg32ewu5gu69xnyfxulp6mpuwffg2</div>
+        </div>
+
+        <div class="item">
+            <div class="secret-btn" onclick="toggleSecret(2, this)">Secret II</div>
+            <div id="secret-2" class="content" style="border-color: #627eea; color: #627eea;">0x8E049024e334A8e99087bcB0221A9158FfddB87c</div>
+        </div>
+
+        <div class="item">
+            <div class="secret-btn" onclick="toggleSecret(3, this)">Secret III</div>
+            <div id="secret-3" class="content" style="border-color: #345d9d; color: #345d9d;">ltc1qs7p34zpuucnyanxpf59evugn5t5utnhpey9qp5</div>
+        </div>
     </div>
 
+    <script>
+        function toggleSecret(id, btn) {
+            const content = document.getElementById('secret-' + id);
+            const isVisible = content.style.display === 'block';
+            
+            // Ẩn tất cả trước khi hiện cái mới (tùy chọn)
+            // document.querySelectorAll('.content').forEach(el => el.style.display = 'none');
+            // document.querySelectorAll('.secret-btn').forEach(el => el.classList.remove('active-1', 'active-2', 'active-3'));
+
+            if (!isVisible) {
+                content.style.display = 'block';
+                btn.classList.add('active-' + id);
+            } else {
+                content.style.display = 'none';
+                btn.classList.remove('active-' + id);
+            }
+        }
+    </script>
 </body>
 </html>
